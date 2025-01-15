@@ -28,3 +28,36 @@ class Player(GameSprite):
             self.rect.x -= self.speed
         if keys[K_RIGHT] and self.rect.x < win_width - 80:
             self.rect.x += self.speed
+         
+win_width = 600
+win_height = 500
+window =display.set_mode((win_width, win_height))
+back = (200, 255, 255)
+window.fill(back)
+
+game = True
+finish = False
+clock = time.Clock()
+FPS = 60
+
+
+racket1 = Player(racket_image, 30, 150, 40, 200, 150)
+racket2 = Player(racket_image, 520, 150, 40, 200, 150)
+
+ball = GameSprite(ball_image, 200, 200, 50, 50, 50)
+
+while game:
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
+    
+    if not finish:
+        racket1.update_l()
+        racket2.update_r()
+
+        racket1.reset()
+        racket2.reset()
+        ball.reset()
+    
+    display.update()
+    clock.tick(FPS)
